@@ -1,0 +1,26 @@
+{
+    "name": "yanosh-k/enivronment_picker"
+    , "description": "Choose a labeled environment based on environment variables or URL."
+    , "keywords": ["environment", "url", "env"]
+    , "homepage": "https://github.com/yanosh-k/environment_picker"
+    , "license": "MIT"
+    , "authors": [
+        {
+            "name": "David"
+            , "homepage": "https://github.com/dfreerksen"
+        }
+        , {
+            "name": "Yanosh Kunsh"
+            , "email": "me@yanosh.net"
+            , "homepage": "https://github.com/yanosh-k/"
+        }
+    ]
+    , "require-dev": {
+        "phpunit/phpunit": "^8.0.0"
+    }
+    , "autoload": {
+       "psr-4": {
+           "YanoshK\\EnvironmentPicker\\": "src/"
+       }
+    }
+}
