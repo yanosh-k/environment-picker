@@ -31,7 +31,7 @@
          *
          * @var bool
          */
-        static protected $strict = false;
+        static protected $strict = true;
 
         /**
          * Environment variable name set in .htaccess (or equivalent)
@@ -84,7 +84,7 @@
          *
          * @param   array|string    $env
          * @param   string          $regex
-         * @return  bool
+         * @return  array
          */
         static public function add($env = [], $regex = '')
         {
@@ -103,9 +103,7 @@
             }
 
             // Combine the existing environments with the newly defined ones
-            self::$environments = array_merge(self::$environments, $env);
-
-            return true;
+            return self::$environments = array_merge(self::$environments, $env);
         }
 
         /**
@@ -180,7 +178,7 @@
                 $host      = parse_url($prepedUrl, PHP_URL_HOST);
             }
             // .htaccess environment variable is set. Make that the current environment
-            else if ($getnev = self::envVar())
+            else if ($getenv = self::envVar())
             {
                 return self::_setEnv($getenv);
             }
