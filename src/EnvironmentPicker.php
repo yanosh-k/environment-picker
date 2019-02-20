@@ -6,6 +6,10 @@
      * Choose a labeled environment based on environment variables or
      * URL.
      * 
+     * This class is based on the work of dfreerksen. The original gist can be
+     * found here: https://gist.github.com/dfreerksen/3366172.
+     * 
+     * 
      * @author David (dfreerksen - https://github.com/dfreerksen)
      * @author Yanosh Kunsh (https://github.com/yanosh-k) <me@yanosh.net>
      */
@@ -68,7 +72,7 @@
         }
 
         /**
-         * Set environment(s)
+         * Set environment(s) (an alias for self::init())
          *
          * @param   array|string    $env
          * @param   string          $regex
@@ -174,7 +178,7 @@
             // extract the host from the passed URL
             if ($url)
             {
-                $prepedUrl = self::_prepUrl($url);
+                $prepedUrl = self::prepURL($url);
                 $host      = parse_url($prepedUrl, PHP_URL_HOST);
             }
             // .htaccess environment variable is set. Make that the current environment
@@ -188,7 +192,7 @@
                 $host = parse_url(self::getCurrentURL(), PHP_URL_HOST);
             }
 
-            
+
             // Determine the environment based on the host
             if (isset($host))
             {
@@ -232,7 +236,10 @@
          */
         static public function isCLI()
         {
-            if ((defined('PHP_SAPI') && PHP_SAPI == 'cli') || (isset($_SERVER['argc']) && $_SERVER['argc'] >= 1))
+            if (
+                !getenv('PHPUNIT_SIMULATE_AS_WEB_REQUEST')
+                && ((defined('PHP_SAPI') && PHP_SAPI == 'cli') || (isset($_SERVER['argc']) && $_SERVER['argc'] >= 1))
+            )
             {
                 return true;
             }
@@ -276,8 +283,45 @@
 
             return $currentURL;
         }
+        
 
         /**
+         * Prepare the URI in case it's not an actual URL
+         *
+         * @param   string  $url
+         * @return  string
+         */
+        static public function prepURL($url = '')
+        {
+            $trimmedUrl = trim($url);
+            $prepedUrl = '';
+            
+            // Check if any URL was passed at all
+            if ($trimmedUrl)
+            {
+                // If the URL contains a protocol, it is ok
+                if (preg_match('@^(?:[a-z]+:)?//@i', $trimmedUrl))
+                {
+                    $prepedUrl = $trimmedUrl;
+                }
+                // If no protocol was detected add it to the URI
+                else
+                {
+                    $serverProtocol = isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : '';
+                    $urlProtocol = strtolower(substr($serverProtocol, 0, strpos($serverProtocol, '/')));
+
+                    $prepedUrl = $urlProtocol ? $urlProtocol . '://' : '//';
+                    $prepedUrl .= $trimmedUrl;
+                }
+            }
+            
+            
+            return $prepedUrl;
+        }
+        
+        
+        
+         /**
          * Set environment
          *
          * @param   string  $env
@@ -294,38 +338,6 @@
             }
 
             return $env;
-        }
-
-        /**
-         * Check if valid URL
-         *
-         * @param   string  $url
-         * @return  bool
-         */
-        static private function _isUrl($url = '')
-        {
-            return (filter_var($url, FILTER_VALIDATE_URL)) ? true : false;
-        }
-
-        /**
-         * Prepare the URL in case it's not an actual URL
-         *
-         * @param   string  $url
-         * @return  string
-         */
-        static private function _prepUrl($url = '')
-        {
-            $url = trim($url);
-
-            if ($url)
-            {
-                if (!preg_match('/^https?:\/\//i', $url))
-                {
-                    $url = 'http://' . $url;
-                }
-            }
-
-            return $url;
         }
 
     }
