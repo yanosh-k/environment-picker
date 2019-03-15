@@ -26,14 +26,14 @@ $environments = array(
 );
 
 // Initialize environments
-\YanoshK\EnvironmentPicker\EnvironmentPicker::init($environments);
+\Yatero\EnvironmentPicker\EnvironmentPicker::init($environments);
 
 // Returns the label of the environment for the current URL
-\YanoshK\EnvironmentPicker\EnvironmentPicker::get();
+\Yatero\EnvironmentPicker\EnvironmentPicker::get();
 
 
 // Return the label of the environment for the given URL
-\YanoshK\EnvironmentPicker\EnvironmentPicker::get('https://demo.my-website.com/foo/bar');
+\Yatero\EnvironmentPicker\EnvironmentPicker::get('https://demo.my-website.com/foo/bar');
 ```
 
 
@@ -54,12 +54,12 @@ $environments = array(
 );
 
 // Initialize environments
-\YanoshK\EnvironmentPicker\EnvironmentPicker::init($environments);
+\Yatero\EnvironmentPicker\EnvironmentPicker::init($environments);
 
 // Before getting the current environment make sure that you have the right variable name
-\YanoshK\EnvironmentPicker\EnvironmentPicker::envVarKey('MY_VAR');
+\Yatero\EnvironmentPicker\EnvironmentPicker::envVarKey('MY_VAR');
 
-\YanoshK\EnvironmentPicker\EnvironmentPicker::get();
+\Yatero\EnvironmentPicker\EnvironmentPicker::get();
 ```
 
 You can set labled regex values as a fallback, if the variable is not set or empty.
@@ -71,10 +71,10 @@ $environments = array(
 );
 
 // Initialize environments
-\YanoshK\EnvironmentPicker\EnvironmentPicker::init($environments);
+\Yatero\EnvironmentPicker\EnvironmentPicker::init($environments);
 
 // Before getting the current environment make sure that you have the right variable name
-\YanoshK\EnvironmentPicker\EnvironmentPicker::envVarKey('MY_VAR');
+\Yatero\EnvironmentPicker\EnvironmentPicker::envVarKey('MY_VAR');
 
-\YanoshK\EnvironmentPicker\EnvironmentPicker::get();
+\Yatero\EnvironmentPicker\EnvironmentPicker::get();
 ```
