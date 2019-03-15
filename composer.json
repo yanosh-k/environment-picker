@@ -1,8 +1,8 @@
 {
-    "name": "yanosh-k/enivronment_picker"
+    "name": "yatero/enivronment-picker"
     , "description": "Choose a labeled environment based on environment variables or URL."
     , "keywords": ["environment", "url", "env"]
-    , "homepage": "https://github.com/yanosh-k/environment_picker"
+    , "homepage": "https://github.com/yanosh-k/environment-picker"
     , "license": "MIT"
     , "authors": [
         {
@@ -21,7 +21,7 @@
     }
     , "autoload": {
        "psr-4": {
-           "YanoshK\\EnvironmentPicker\\": "src/"
+           "Yatero\\EnvironmentPicker\\": "src/"
        }
     }
 }

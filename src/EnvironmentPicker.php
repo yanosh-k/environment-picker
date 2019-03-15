@@ -1,6 +1,6 @@
 <?php
 
-namespace YanoshK\EnvironmentPicker;
+namespace Yatero\EnvironmentPicker;
 
 /**
  * Choose a labeled environment based on environment variables or
